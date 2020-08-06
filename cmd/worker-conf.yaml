@@ -1,0 +1,8 @@
+version: v1
+name: worker-0
+ip: 192.168.1.189
+port: 12525
+homedir: /home/k8s/workspace-go/autoflow-worker/cmd/tmp
+accesstoken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTQzNzA0NzYsImlzcyI6ImFkbWluIn0.PVRgKotqxSVcTSDGRpd7f8f8jdihiN2eNrVTIcse7gY
+apiserverip: 122.51.161.53
+apiserverport: 12307
