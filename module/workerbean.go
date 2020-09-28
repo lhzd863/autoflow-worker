@@ -14,7 +14,7 @@ type MetaParaWorkerJobBean struct {
 	Cmd       []interface{} `json:"cmd"`
 	Parameter []interface{} `json:"parameter"`
 	Timeout   int64         `json:"timeout"`
-	Retry     int8          `json:"retry"`
+	Retry     int           `json:"retry"`
 }
 
 type MetaWorkerJobBean struct {
@@ -29,7 +29,7 @@ type MetaWorkerJobBean struct {
 	Cmd        []interface{} `json:"cmd"`
 	Parameter  []interface{} `json:"parameter"`
 	Timeout    int64         `json:"timeout"`
-	Retry      int8          `json:"retry"`
+	Retry      int           `json:"retry"`
 	StartTime  string        `json:"starttime"`
 	EndTime    string        `json:"endtime"`
 	Status     string        `json:"status"`
@@ -49,7 +49,7 @@ type MetaWorkerConf struct {
 	Ip            string `yaml:"ip"`
 	Port          string `yaml:"port"`
 	HomeDir       string `yaml:"homedir"`
-	MaxProcess    int64  `yaml:"maxprocess"`
+	MaxProcess    int    `yaml:"maxprocess"`
 	AccessToken   string `yaml:"accesstoken"`
 	ApiserverIp   string `yaml:"apiserverip"`
 	ApiserverPort string `yaml:"apiserverport"`

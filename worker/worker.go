@@ -71,6 +71,7 @@ func NewWorkerServer(paraMap map[string]interface{}) *WorkerServer {
 	Ip = conf.Ip
 	Port = conf.Port
 	HomeDir = conf.HomeDir
+        ProcessNum = conf.MaxProcess
         mgr = NewMgrWorkerServer(paraMap)
 
 	m := &WorkerServer{}
@@ -243,9 +244,9 @@ func (ws *WorkerServer) executeJob(job *module.MetaParaWorkerJobBean) (string, e
 
 		glog.Glog(f, fmt.Sprintf("%v=%v", EVN_VAR_CTX_STR, m.Context))
 		os.Setenv(EVN_VAR_CTX_STR, m.Context)
-		var n int8 = 0
+		var n int = 0
 		if m.Retry < 1 {
-			glog.Glog(f, fmt.Sprintf("%v.%v %v ID(%v) retry time lt 1.%v", m.Sys, m.Job, m.Context, m.Id, err))
+			glog.Glog(f, fmt.Sprintf("%v.%v %v ID(%v) retry %v time lt 1.%v", m.Sys, m.Job, m.Context, m.Id, m.Retry, err))
 			return "1", fmt.Errorf("%v.%v %v ID(%v) retry time lt 1.%v", m.Sys, m.Job, m.Context, m.Id, err)
 		}
 		retcdstr := "0"
