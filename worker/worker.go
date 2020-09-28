@@ -166,6 +166,7 @@ func (ws *WorkerServer) executeJob(job *module.MetaParaWorkerJobBean) (string, e
 
 	exist, err := util.PathExists(logDir)
 	if err != nil {
+                exitChan <- 1
 		return "1", fmt.Errorf("failed to path exists: %v", err)
 	}
 	if !exist {
@@ -246,6 +247,7 @@ func (ws *WorkerServer) executeJob(job *module.MetaParaWorkerJobBean) (string, e
 		os.Setenv(EVN_VAR_CTX_STR, m.Context)
 		var n int = 0
 		if m.Retry < 1 {
+                        exitChan <- 1
 			glog.Glog(f, fmt.Sprintf("%v.%v %v ID(%v) retry %v time lt 1.%v", m.Sys, m.Job, m.Context, m.Id, m.Retry, err))
 			return "1", fmt.Errorf("%v.%v %v ID(%v) retry time lt 1.%v", m.Sys, m.Job, m.Context, m.Id, err)
 		}
@@ -261,6 +263,7 @@ func (ws *WorkerServer) executeJob(job *module.MetaParaWorkerJobBean) (string, e
 			break
 		}
 		if err != nil {
+                        exitChan <- 1
 			glog.Glog(f, fmt.Sprintf("%v.%v %v ID(%v) step.%v run fail.%v", m.Sys, m.Job, m.Context, m.Id, i, err))
 			glog.Glog(f, fmt.Sprintf("\n"))
 			return retcdstr, err
@@ -268,6 +271,7 @@ func (ws *WorkerServer) executeJob(job *module.MetaParaWorkerJobBean) (string, e
 		glog.Glog(f, fmt.Sprintf("%v.%v %v ID(%v) step.%v run successfully.", m.Sys, m.Job, m.Context, m.Id, i))
 	}
 	glog.Glog(f, fmt.Sprintf("\n"))
+        exitChan <- 1
 	return "0", nil
 }
 
